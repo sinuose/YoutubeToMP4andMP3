@@ -17,7 +17,7 @@ if __name__ == '__main__': # only runs when executed as a script
         while True:
             os.system('cls' if os.name == 'nt' else 'clear')
             link = input('Youtube Link:')
-            if link == '' or 'quit':
+            if link == 'quit':
                 print('\n See you next time.')
                 sys.exit()
             mp4_saved = getYoutubeMP4Highest(link, mp4_dir)
