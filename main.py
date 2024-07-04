@@ -5,7 +5,7 @@ from utils import *
 from yt_scraper import *
 
 if __name__ == '__main__': # only runs when executed as a script
-        print('This will save as an MP4, and MP3')
+        #print('This will save as an MP4, and MP3')
         output = input('Save Path: ')
         # get the directories ready
         mp4_dir = output + r'\mp4'
@@ -15,6 +15,7 @@ if __name__ == '__main__': # only runs when executed as a script
 
 
         while True:
+            os.system('cls' if os.name == 'nt' else 'clear')
             link = input('Youtube Link:')
             if link == '' or 'quit':
                 print('\n See you next time.')
