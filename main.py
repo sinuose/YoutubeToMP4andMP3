@@ -1,11 +1,10 @@
-import pytube
 import sys
 import os
 from utils import *
 from yt_scraper import *
 
 if __name__ == '__main__': # only runs when executed as a script
-        #print('This will save as an MP4, and MP3')
+        print('This will save as an MP4, and MP3')
         output = input('Save Path: ')
         # get the directories ready
         mp4_dir = output + r'\mp4'

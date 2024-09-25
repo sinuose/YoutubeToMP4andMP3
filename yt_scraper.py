@@ -5,27 +5,20 @@ def getYoutubeMP4Highest(link, output):
     video = pytube.YouTube(link)
     streams = video.streams
 
-    # find the mp4 audio streams
-    audio = []
-    for i in range(len(streams)):
-        if streams[i].type == 'audio' and streams[i].mime_type == "audio/mp4":
-            audio.append(streams[i])
+    # Find the mp4 audio streams
+    audio = [s for s in streams if s.type == 'audio' and s.mime_type == "audio/mp4"]
 
-    # get highest sampling rate
-    # sort the audio
-    for i in range(len(audio)):
-        if i == 0:
-            audio_highest = audio[i]
-        # check which is higher
-        abr_highest = ''.join(c for c in audio_highest.abr if c.isdigit())
-        abr_curr = ''.join(c for c in audio[i].abr if c.isdigit())
-        # update the highest
-        if int(abr_curr) > int(abr_highest):
-            audio_highest = audio[i]
+    # Get highest sampling rate
+    audio_highest = max(audio, key=lambda s: int(''.join(filter(str.isdigit, s.abr))))
 
     video_final = video.streams.get_by_itag(audio_highest.itag)
     pathout = video_final.download(output_path=output)
     return pathout
+
+def convertMP4toM4A(mp4_path, m4a_path):
+    audio_clip = AudioFileClip(mp4_path)
+    audio_clip.write_audiofile(m4a_path, codec='aac')
+    audio_clip.close()
 
 def convertMP4toMP3(mp4_path, mp3_path):
     FILETOCONVERT = AudioFileClip(mp4_path)
